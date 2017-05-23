@@ -1,13 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h> 
+#include <errno.h> 
+#include <string.h> 
+#include <netdb.h> 
+#include <sys/types.h> 
+#include <netinet/in.h> 
+#include <sys/socket.h> 
+#include <arpa/inet.h> 
+#include <sys/wait.h>
 
 #define TCP_PORT "23023"
 #define UDP_PORT "24023"
@@ -17,8 +18,7 @@
 #define BACKLOG 10 // how many pending connections queue will hold
 
 //The following code are learned from Beej's tutorial
-void sigchld_handler(int s)
-{
+void sigchld_handler(int s){
 	// waitpid() might overwrite errno, so we save and restore it:
 	int saved_errno = errno;
 	while(waitpid(-1, NULL, WNOHANG) > 0);
